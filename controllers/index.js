@@ -3,10 +3,12 @@ const router = express.Router();
 var home = require('./home.js');
 
 router.get('/', (req, res, next) => {
-    console.log(home.url());
     res.render('index', {
-        title: 'SLANGUAGE'
+        title: 'SLANGUAGE',
     });
 });
+
+router.get('/', home.grabDefs);
+router.get('/', home.click);
 
 module.exports = router;
