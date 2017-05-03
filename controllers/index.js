@@ -10,7 +10,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/yes', (req, res, next) => {
     res.render('index', {
-        yes: home.grabDefs,
+        yes1: home.grabOxfordDefs,
+        yes2: home.grabUrbanDefs,
         title: 'yes'
     })
 });
