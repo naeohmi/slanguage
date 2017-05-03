@@ -1,3 +1,4 @@
+console.log('home.js is alive');
 const axios = require('axios');
 let word = 'hello';
 
@@ -6,7 +7,8 @@ const urbanDictionaryUrl = 'http://api.urbandictionary.com/v0/define?term=';
 //const merwebDictionary2 = '764f81a5-669d-4172-b6f3-ae92a8403263'; //collegiate level dictionary key
 
 const oxfordDictionary1 = 'https://od-api.oxforddictionaries.com/api/v1'; //base URL
-let grabDefs = (req, res, next) => {
+function grabDefs() {
+    console.log('grabDefs is alive');
     //config headers with access to Oxford Dictionary API
     var config = {
         headers: {
@@ -19,6 +21,7 @@ let grabDefs = (req, res, next) => {
     axios.get(`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/regions=us`, config)
 
     .then((res) => {
+            console.log('grabDefs THEN is alive');
             //save whole object as a variable
             console.log(res.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]);
             var oxfordExample = res.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0];
@@ -48,7 +51,7 @@ let displayDefs = (word) => {
             console.log(d.data);
         })
 };
-
+grabDefs();
 module.exports = {
     grabDefs: grabDefs,
     click: click

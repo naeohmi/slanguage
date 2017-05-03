@@ -5,10 +5,14 @@ var home = require('./home.js');
 router.get('/', (req, res, next) => {
     res.render('index', {
         title: 'SLANGUAGE',
-    });
+    })
 });
 
-router.get('/', home.grabDefs);
-router.get('/', home.click);
+router.get('/yes', (req, res, next) => {
+    res.render('index', {
+        yes: home.grabDefs,
+        title: 'yes'
+    })
+});
 
 module.exports = router;
