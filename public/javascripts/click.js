@@ -1,7 +1,7 @@
-console.log('PUBLIC click.js has awoken!');
-
 class Click {
     constructor() {
+            this.submitButton();
+            console.log('PUBLIC click.js has awoken!');
 
         }
         //when the submit button is clicked, saved the text that was entered into a new variable
@@ -10,8 +10,9 @@ class Click {
         const submit = document.getElementById('clickSubmit');
         submit.addEventListener('click', () => {
             let sentence = document.getElementById('toDefine').value;
-            // displayDefs(sentence);
-            return sentence;
+            this.sentenceToWords(sentence);
+            // console.log(sentence);
+            // return sentence;
         });
     };
 
@@ -19,6 +20,7 @@ class Click {
     //make an array and populate the fields with each new word at a unique index
     //add the words to the words.sql database
     sentenceToWords(sentence) {
+        console.log('sentencetowords is alive!');
         let sentenceArray = sentence.split();
         for (let i = 0; i <= sentenceArray.length; i++) {
             //need to save in database
@@ -43,5 +45,3 @@ class Click {
 
     };
 };
-
-let click = new Click();

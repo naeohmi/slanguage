@@ -1,7 +1,14 @@
-//console.log('home.js is alive');
+console.log('definitions.js is alive');
 const axios = require('axios');
-let word = 'lol';
+//let word = 'lol';
 
+let getSentence = (req, res, next) => {
+    console.log('getSentence() awoke');
+    var inputSentence = req.query.sentence;
+    var word = inputSentence.split(' ');
+};
+
+// getSentence(req, res, next);
 class GrabDefs {
     constructor() {}
 
@@ -57,5 +64,6 @@ let definitions = new GrabDefs();
 // let def2 = definitions.grabOxfordDefs(word);
 
 module.exports = {
-    definitions: definitions
+    definitions: definitions,
+    getSentence: getSentence
 };

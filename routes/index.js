@@ -1,24 +1,29 @@
 const express = require('express');
 const router = express.Router();
-var d = require('./definitions.js');
-var c = require('../public/javascripts/click.js')
-    // var m = require('../main.js');
+let api = require('./definitions.js');
+let c = require('../public/javascripts/click.js')
 
 router.get('/', (req, res, next) => {
     res.render('index', {
         title: 'SLANGUAGE',
+        definitions: api.grabOxfordDefs,
+        // getSentence: api.getSentence,
     })
 });
-//NEED TO CHANGE
-router.get('/yes', (req, res, next) => {
-    res.render('index', {
-        // yes1: home.grabUrbanDefs,
-        yes2: d.grabOxfordDefs,
-        yes3: c.click.submitButton(), //NEED TO CHANGE
-        title: 'yes'
+// router.patch('/:', (req, res, next) => {
+//     res.render('index', {
+//         clickEvent: c,
+//     })
+// });
 
+router.get('/p', (req, res, send) => {
+    res.render('index', {
+        getSentence: api.getSentence
     })
+    res.send("sentence is set to " + req.query.sentence);
 });
+
+//http://localhost:3000/?sentence=sentence+to+words
 
 module.exports = router;
 
