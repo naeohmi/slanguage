@@ -2,16 +2,18 @@ console.log('click.js has awoken!');
 
 class Click {
     constructor() {
-            this.submitButton();
+            this.submitButton(e);
 
         }
         //when the submit button is clicked, saved the text that was entered into a new variable
         //and invoke the displayDef method to display the definitions
-    submitButton() {
+    submitButton(e) {
+        e.preventDefault();
         const submit = document.getElementById('clickSubmit');
         submit.addEventListener('click', () => {
             let sentence = document.getElementById('toDefine').value;
-
+            let words = window.location.href.split(' ');
+            console.log(words);
             // this.sentenceToWords(sentence);
             // console.log(sentence);
             // return sentence;

@@ -3,12 +3,21 @@ const router = express.Router();
 let api = require('./definitions.js');
 
 router.get('/', (req, res, next) => {
+    if (req.query.sentence != null) {
+        passThisAlong(req, res, next);
+    }
+
     res.render('index', {
         title: 'SLANGUAGE',
         // definitions: api.grabOxfordDefs,
-        s: api.getSentence
+        // s: api.getSentence
     })
 });
+
+function passThisAlong(req, res, next) {
+    console.log("Passed: " + req.query.sentence);
+    api.getSentence(req, res, next);
+}
 
 /* GET home page. */
 // router.get('/', (req, res, next) => {

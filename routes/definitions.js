@@ -10,18 +10,47 @@ const db = pgp(connectionString);
 //let word = 'lol';
 
 let getSentence = (req, res, next) => {
-
+    console.log("These are the query results: " + req.query.sentence);
     console.log('getSentence() awoke');
 
     var inputSentence = req.query.sentence;
     var word = inputSentence.split(' ');
-    console.log(inputSentence)
+    console.log("The words are: " + inputSentence)
         // db.none('SELECT * FROM sentences;')
-    db.none('INSERT INTO sentences(word1, word2, word3, word4, word5, word6, word7)' +
-            'VALUES(${word[0]}, ${word[1]}, ${word[2]}, ${word[3]}, ${word[4]}, ${word[5]}, ${word[6]}, ${word[7]})',
-            req.query)
-        .then(res.redirect('/'));
+        // db.one('INSERT INTO sentences(word1, word2, word3, word4, word5, word6, word7)' +
+        //         'VALUES(${word[0]}, ${word[1]}, ${word[2]}, ${word[3]}, ${word[4]}, ${word[5]}, ${word[6]}, ${word[7]})',
+        //         req.query)
+        //     .then(res.redirect('/'));
+    db.one(setWhere(word))
+        .then(res.redirect('/'))
+        .catch((error) => {
+            console.log('im an errorrr');
+            // console.log('error', error);
+        });
 };
+
+function setWhere(wordArray) {
+    let fullString = 'INSERT INTO sentences(';
+
+    for (let i = 0; i < wordArray.length; i++) {
+        let key = "word" + [i + 1];
+        let more = i === wordArray.length - 1 ? '' : ', ';
+        fullString += key + more;
+    }
+
+    fullString += ") VALUES(";
+
+    for (let i = 0; i < wordArray.length; i++) {
+        let key = wordArray[i];
+        let more = i === wordArray.length - 1 ? '' : ', ';
+        fullString += "'" + key + "'" + more;
+    }
+
+    fullString += ");";
+
+    console.log(fullString);
+    return fullString;
+}
 
 // FOR REFERENCE
 // let createContact = (req, res, next) => {
