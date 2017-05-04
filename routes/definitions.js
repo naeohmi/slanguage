@@ -22,7 +22,7 @@ let getSentence = (req, res, next) => {
         //         req.query)
         //     .then(res.redirect('/'));
     db.one(setWhere(word))
-        .then(res.redirect('/'))
+        // .then(res.redirect('/'))
         .catch((error) => {
             console.log('im an errorrr');
             // console.log('error', error);
