@@ -1,6 +1,6 @@
 //console.log('home.js is alive');
 const axios = require('axios');
-// let word = 'brunch';
+let word = 'lol';
 
 class GrabDefs {
     constructor() {}
@@ -16,8 +16,8 @@ class GrabDefs {
             var urbanDefExample1 = res.data.list[0].example;
             var urbanDef2 = res.data.list[1].definition;
             var urbanDefExample2 = res.data.list[1].example;
-            // console.log('urban' + urbanDef1, urbanDefExample1);
-            // console.log(urbanDef2, urbanDefExample2);
+            console.log('urban' + urbanDef1, urbanDefExample1);
+            console.log(urbanDef2, urbanDefExample2);
         });
     };
 
@@ -38,23 +38,23 @@ class GrabDefs {
                 //save whole object as a variable
                 // console.log(res);
                 var oxfordDef1 = res.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
-                // var oxfordDef2 = res.data.results[0].lexicalEntries[0].entries[0].subsenses[0].definitions[0];
+                var oxfordDef2 = res.data.results[0].lexicalEntries[0].entries[0].subsenses[0].definitions[0];
 
                 var oxfordExample1 = res.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
                 console.log('oxford' + oxfordDef1, oxfordExample1);
-                // console.log('2', oxfordDef2);
+                console.log('2', oxfordDef2);
             })
             .catch((error) => {
                 //console.log('im an errorrr');
                 //console.log('error', error);
-                this.grabUrbanDefs();
+                // this.grabUrbanDefs();
             });
     };
 };
 
 let definitions = new GrabDefs();
-// let def1 = definitions.grabUrbanDefs();
-// let def2 = definitions.grabOxfordDefs();
+// let def1 = definitions.grabUrbanDefs(word);
+// let def2 = definitions.grabOxfordDefs(word);
 
 module.exports = {
     definitions: definitions

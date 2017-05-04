@@ -1,5 +1,4 @@
-console.log('click.js has awoken!');
-const axios = require('axios');
+console.log('PUBLIC click.js has awoken!');
 
 class Click {
     constructor() {
@@ -12,7 +11,7 @@ class Click {
         submit.addEventListener('click', () => {
             let sentence = document.getElementById('toDefine').value;
             // displayDefs(sentence);
-            return sentence
+            return sentence;
         });
     };
 
@@ -46,6 +45,3 @@ class Click {
 };
 
 let click = new Click();
-module.exports = {
-    click: click
-}

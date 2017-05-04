@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 var d = require('./definitions.js');
-var c = require('./click.js');
+var c = require('../public/javascripts/click.js')
+    // var m = require('../main.js');
 
 router.get('/', (req, res, next) => {
     res.render('index', {
@@ -20,3 +21,8 @@ router.get('/yes', (req, res, next) => {
 });
 
 module.exports = router;
+
+// need to structure as a request
+// POST / PATCH(need to check) request each word
+// POST / PATCH and each definition(like the contact list and create meal)
+// REQUEST in index.js
