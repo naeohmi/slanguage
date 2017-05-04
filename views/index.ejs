@@ -3,22 +3,21 @@
 <% include ./partials/header %>
 
     <body>
+        <div class='video-container'>
+            <video autoplay loop class='video'>
+                    <source src="../images/beauty.mp4" type="video/webm" >
+                    </video>
+        </div>
+        <h1>
+            <%= title %>
+        </h1>
         <div id='container'>
-            <!--<div class='video-container'>-->
-            <!--<div class='video'>-->
-            <h1>
-                <%= title %>
-            </h1>
-
             <form id="sentenceForm">
                 <input id="toDefine" type="text" name="sentence" placeholder="enter text here">
                 <button id="clickSubmit">send</button>
             </form>
-
-            <div id="defs">
-                <!--</div>-->
-                <!--</div>-->
-            </div>
+        </div>
+        <div id="defs">
         </div>
     </body>
     <% include ./partials/scripts %>

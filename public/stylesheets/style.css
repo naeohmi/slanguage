@@ -20,13 +20,15 @@ h1 {
     color: purple;
 }
 
-h3 {
-    color: purple;
-    font-size: 30px;
+form {
+    z-index: 10;
 }
 
 
-/*video background source: https://slicejack.com/fullscreen-html5-video-background-css/*/
+/*
+video background source:
+https://slicejack.com/fullscreen-html5-video-background-css/
+*/
 
 .video-container {
     position: fixed;
@@ -35,6 +37,7 @@ h3 {
     bottom: 0;
     left: 0;
     overflow: hidden;
+    pointer-events: none;
     z-index: -100;
 }
 

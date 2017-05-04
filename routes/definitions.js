@@ -1,12 +1,47 @@
 console.log('definitions.js is alive');
 const axios = require('axios');
+
+const promise = require('bluebird');
+const options = { promiseLib: promise };
+const pgp = require('pg-promise')(options)
+const connectionString = 'postgres://localhost:5432/sentences';
+const db = pgp(connectionString);
+
 //let word = 'lol';
 
 let getSentence = (req, res, next) => {
+
     console.log('getSentence() awoke');
+
     var inputSentence = req.query.sentence;
     var word = inputSentence.split(' ');
+    console.log(inputSentence)
+        // db.none('SELECT * FROM sentences;')
+    db.none('INSERT INTO sentences(word1, word2, word3, word4, word5, word6, word7)' +
+            'VALUES(${word[0]}, ${word[1]}, ${word[2]}, ${word[3]}, ${word[4]}, ${word[5]}, ${word[6]}, ${word[7]})',
+            req.query)
+        .then(res.redirect('/'));
 };
+
+// FOR REFERENCE
+// let createContact = (req, res, next) => {
+// req.body.age = parseInt(req.body.age)
+//     db.none('INSERT INTO contacts(first, last, age, gender)' +
+//             'VALUES(${first}, ${last}, ${age}, ${gender})',
+//             req.body)
+//         .then(res.redirect('/'))
+// };
+
+// let getContacts = (req, res, next) => {
+//     db.any('select * from contacts')
+//         .then(function(data) {
+//             res.render('index', {
+//                 title: "All Contacts",
+//                 data: data
+//             })
+//         })
+// };
+
 
 // getSentence(req, res, next);
 class GrabDefs {
@@ -62,7 +97,7 @@ class GrabDefs {
 let definitions = new GrabDefs();
 // let def1 = definitions.grabUrbanDefs(word);
 // let def2 = definitions.grabOxfordDefs(word);
-
+// getSentence(req, res, next);
 module.exports = {
     definitions: definitions,
     getSentence: getSentence

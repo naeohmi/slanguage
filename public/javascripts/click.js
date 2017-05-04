@@ -1,7 +1,8 @@
+console.log('click.js has awoken!');
+
 class Click {
     constructor() {
             this.submitButton();
-            console.log('PUBLIC click.js has awoken!');
 
         }
         //when the submit button is clicked, saved the text that was entered into a new variable
@@ -10,10 +11,12 @@ class Click {
         const submit = document.getElementById('clickSubmit');
         submit.addEventListener('click', () => {
             let sentence = document.getElementById('toDefine').value;
-            this.sentenceToWords(sentence);
+
+            // this.sentenceToWords(sentence);
             // console.log(sentence);
             // return sentence;
         });
+
     };
 
     //take the sentence that was input into the toDefine field and grab each individual word 

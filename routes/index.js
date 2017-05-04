@@ -1,15 +1,22 @@
 const express = require('express');
 const router = express.Router();
 let api = require('./definitions.js');
-let c = require('../public/javascripts/click.js')
 
 router.get('/', (req, res, next) => {
     res.render('index', {
         title: 'SLANGUAGE',
         // definitions: api.grabOxfordDefs,
-        getSentence: api.getSentence,
+        s: api.getSentence
     })
 });
+
+/* GET home page. */
+// router.get('/', (req, res, next) => {
+
+//     api.getSentence
+// });
+// router.post('/', db.createContact);
+
 // router.patch('/:', (req, res, next) => {
 //     res.render('index', {
 //         clickEvent: c,
