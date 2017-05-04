@@ -1,7 +1,6 @@
 console.log('click.js has awoken!');
 const axios = require('axios');
 
-
 class Click {
     constructor() {
 
@@ -46,7 +45,7 @@ class Click {
     };
 };
 
-let c = new Click();
+let click = new Click();
 module.exports = {
-    c: c
+    click: click
 }
