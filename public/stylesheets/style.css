@@ -1,8 +1,70 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+#container {
+    width: 50%;
+    height: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    text-align: center;
+    border-radius: 20%;
+    top: 50px;
+    left: 50px;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 5em;
+    color: purple;
+}
+
+h3 {
+    color: purple;
+    font-size: 30px;
+}
+
+
+/*video background source: https://slicejack.com/fullscreen-html5-video-background-css/*/
+
+.video-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .video {
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .video {
+        width: 300%;
+        left: -100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .video-container {
+        background: url('../images/beauty.mp4') center center / cover no-repeat;
+    }
+    .video {
+        display: none;
+    }
 }

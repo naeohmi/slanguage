@@ -7,10 +7,10 @@ An app to help people learn English slang, to communicate effectively with nativ
 ----------
 
 ![image of first wire-frame]
-(./images/first-frame.jpg)
+(./first-frame.jpg)
 
 ![image of second wire-frame]
-(/images/second-frame.jpg)
+(./second-frame.jpg)
 
 ## User Stories
 ------------

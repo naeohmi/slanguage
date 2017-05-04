@@ -6,8 +6,8 @@ let c = require('../public/javascripts/click.js')
 router.get('/', (req, res, next) => {
     res.render('index', {
         title: 'SLANGUAGE',
-        definitions: api.grabOxfordDefs,
-        // getSentence: api.getSentence,
+        // definitions: api.grabOxfordDefs,
+        getSentence: api.getSentence,
     })
 });
 // router.patch('/:', (req, res, next) => {
@@ -16,12 +16,12 @@ router.get('/', (req, res, next) => {
 //     })
 // });
 
-router.get('/p', (req, res, send) => {
-    res.render('index', {
-        getSentence: api.getSentence
-    })
-    res.send("sentence is set to " + req.query.sentence);
-});
+// router.get('/p', (req, res, send) => {
+//     res.render('index', {
+//         getSentence: api.getSentence
+//     })
+//     res.send("sentence is set to " + req.query.sentence);
+// });
 
 //http://localhost:3000/?sentence=sentence+to+words
 
