@@ -12,18 +12,25 @@ class Click {
         const submit = document.getElementById('clickSubmit');
         submit.addEventListener('click', () => {
             let sentence = document.getElementById('toDefine').value;
-            displayDefs(sentence);
+            // displayDefs(sentence);
+            return sentence
         });
     };
 
     //take the sentence that was input into the toDefine field and grab each individual word 
     //make an array and populate the fields with each new word at a unique index
     //add the words to the words.sql database
-    sentenceToWords() {
-
+    sentenceToWords(sentence) {
+        let sentenceArray = sentence.split();
+        for (let i = 0; i <= sentenceArray.length; i++) {
+            //need to save in database
+            console.log('get defs ' + getTheDefs(sentenceArray[i]));
+        };
     };
     //take the words and run them through one at a time to get the definitions
-    getTheDefs() {
+    getTheDefs(word) {
+        let defs = new GrabDefs();
+        return defs.grabUrbanDefs(word);
 
     };
     //after each definition has been retrieved, display them on the screen
@@ -38,3 +45,8 @@ class Click {
 
     };
 };
+
+let c = new Click();
+module.exports = {
+    c: c
+}
