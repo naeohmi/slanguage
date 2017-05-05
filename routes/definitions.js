@@ -14,7 +14,7 @@ let getSentence = (req, res, next) => {
     var inputSentence = req.query.sentence;
     var wordArray = inputSentence.split(' ');
     db.one(setWhere(wordArray))
-        // .then(res.redirect('/'))
+        .then(res.redirect('/'))
         .catch((err) => {
             return next(err);
         });
@@ -34,13 +34,9 @@ let setWhere = (wordArray) => {
         fullString += "'" + key + "'" + more;
     };
     fullString += ");";
-
-    console.log(wordArray);
-
+    // console.log(wordArray);
     wordLoop(wordArray);
-
     return fullString;
-
 };
 // getSentence(req, res, next);
 let wordLoop = (wordArray) => {
@@ -52,44 +48,43 @@ let wordLoop = (wordArray) => {
     }
 };
 
-
 class GrabDefs {
     constructor() {}
 
     grabUrbanDefs(word) {
-
         // console.log('urban defs has awoken!');
         axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
 
         .then((res) => {
-                console.log('urban awoke!');
-                //console.log(res.data);
-                var urbanDef1 = res.data.list[0].definition;
-                var urbanSent1 = res.data.list[0].example;
-                var urbanDef2 = res.data.list[1].definition;
-                var urbanSent2 = res.data.list[1].example;
-                console.log('urban1: ' + urbanDef1, urbanSent1);
-                console.log('urban2: ' + urbanDef2, urbanSent2);
-                return urbanDef1, urban
-            })
-            .catch((err) => {
-                return next(err);
-            });
+            // let body = req.body;
+            console.log('urban awoke!');
+            //console.log(res.data);
+            var urbanDef1 = res.data.list[0].definition;
+            var urbanSent1 = res.data.list[0].example;
+            var urbanDef2 = res.data.list[1].definition;
+            var urbanSent2 = res.data.list[1].example;
+            console.log('urban1: ' + urbanDef1, urbanSent1);
+            // console.log('urban2: ' + urbanDef2, urbanSent2);
+            // return urbanDef1, urban
+
+            db.none(
+                "INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2)" +
+                "VALUES ($1, $2, $3, $4, $5, $6)", [4, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2]
+            )
+
+            // .then(res.redirect('/'))
+        });
+
+
+        // .catch(err => {
+        //     res.status(400).json(err);
+        // });
     };
-
-
-    // let addUrbanDefs = (req, res, next) => {
-    //     db.none(
-    //             'INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)' +
-    //             'VALUES (${1}, ${word}, ${urbanDef1}, ${urbanDef2}, ${urbanSent1}, ${urbanSent2}, ${oxfordDef1}, ${oxfordDef2}, ${oxfordSent1}, ${oxfordSent2})',
-    //             req.body)
-    //         .then(res.redirect('/'))
-    // };
 
 
     grabOxfordDefs(word) {
         console.log('oxford has arrived!');
-        console.log('OXFORDDDD: ' + word);
+        // console.log('OXFORDDDD: ' + );
         //config headers with access to Oxford Dictionary API
         var config = {
             headers: {
@@ -101,7 +96,6 @@ class GrabDefs {
         axios.get(`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/regions=us`, config)
 
         .then((res) => {
-
                 //save whole object as a variable
                 // console.log(res);
                 // res.locals.FUNCTION = rsponse.data...
@@ -113,13 +107,13 @@ class GrabDefs {
                 console.log('oxford1: ' + oxfordDef1, oxfordSent1);
                 console.log('oxford2: ' + oxfordDef2);
             })
-            .catch((err) => {
-                return next(err);
+            // .catch((err) => {
+            // return next(err);
 
-                //console.log('im an errorrr');
-                // console.log('sorry can/t find that word');   
-                //this.grabUrbanDefs(word);
-            });
+        //console.log('im an errorrr');
+        // console.log('sorry can/t find that word');   
+        //this.grabUrbanDefs(word);
+        // });
     };
 };
 // let definitions = new GrabDefs();
@@ -132,3 +126,8 @@ module.exports = {
     // definitions: definitions,
     getSentence: getSentence
 };
+
+
+//axios race condition 
+//axios.all -- can call end number of reqs then manage 
+//promise to complete before
