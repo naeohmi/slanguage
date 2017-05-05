@@ -1,4 +1,4 @@
-console.log('definitions.js is alive');
+// console.log('definitions.js is alive');
 const axios = require('axios');
 const promise = require('bluebird');
 const options = { promiseLib: promise };
@@ -6,9 +6,7 @@ const pgp = require('pg-promise')(options)
 const connectionString = 'postgres://localhost:5432/slanguage';
 const db = pgp(connectionString);
 
-
 let getSentence = (req, res, next) => {
-    // console.log("These are the query results: " + req.query.sentence);
     var inputSentence = req.query.sentence;
     var wordArray = inputSentence.split(' ');
     db.one(setWhere(wordArray))
@@ -32,34 +30,27 @@ let setWhere = (wordArray) => {
         fullString += "'" + key + "'" + more;
     };
     fullString += ");";
-    // console.log(wordArray);
     wordLoop(wordArray);
     return fullString;
 };
-// getSentence(req, res, next);
+
 let wordLoop = (wordArray) => {
     for (let i = 0; i <= wordArray.length; i++) {
         let currentWord = wordArray[i];
         let yayApiFun = new GrabDefs();
-        // yayApiFun.grabUrbanDefs(currentWord);
-        // yayApiFun.grabOxfordDefs(currentWord);
         yayApiFun.axiosDotAll(currentWord);
-
     }
 };
 
 class GrabDefs {
     constructor() {}
-
     grabUrbanDefs(word) {
         // console.log('urban defs has awoken!');
         return axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
-
     };
 
     grabOxfordDefs(word) {
         // console.log('oxford has arrived!');
-        // console.log('OXFORDDDD: ' + );
         //config headers with access to Oxford Dictionary API
         var config = {
             headers: {
@@ -69,42 +60,31 @@ class GrabDefs {
             }
         };
         return axios.get(`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/regions=us`, config)
-
     };
+
     axiosDotAll(currentWord) {
         axios.all([this.grabUrbanDefs(currentWord), this.grabOxfordDefs(currentWord)])
             .then(axios.spread((urban, oxford) => {
-                // console.log('word', currentWord);
-                // console.log('axios', urban);
+
                 var urbanDef1 = urban.data.list[0].definition;
                 var urbanSent1 = urban.data.list[0].example;
+
                 var urbanDef2 = urban.data.list[1].definition;
                 var urbanSent2 = urban.data.list[1].example;
-                // console.log('urban1: ' + urbanDef1, urbanSent1);
-                // console.log('urban2: ' + urbanDef2, urbanSent2);
-
-                // db.none(
-                //     "INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2)" +
-                //     "VALUES ($1, $2, $3, $4, $5, $6);", [4, currentWord, urbanDef1, urbanDef2, urbanSent1, urbanSent2]
-                // )
 
                 var oxfordDef1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
                 var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
-                // var oxfordDef2 = 'cool';
-                var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
-                var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text; //MIGHT NEED TO CHANGE LATER
-                // console.log('oxford1: ' + oxfordDef1, oxfordSent1);
-                // var oxfordSent2 = 'hi';
-                console.log('OXFORD: ' + oxfordDef2, oxfordSent2);
 
+                var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
+                var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text;
+                // console.log('OXFORD: ' + oxfordDef2, oxfordSent2);
                 db.none(
                         "INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)" +
                         "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);", [7, currentWord, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2]
                     )
                     //.then()
-
-                // return urbanDef1, urbanSent1, urbanDef2, urbanSent2;
-                // return oxfordDef1, oxfordSent1, oxfordDef2, oxfordSent2;
+                    // return urbanDef1, urbanSent1, urbanDef2, urbanSent2;
+                    // return oxfordDef1, oxfordSent1, oxfordDef2, oxfordSent2;
 
             }))
             .catch(error => {

@@ -34,7 +34,3 @@ CREATE TABLE words (
 INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2) 
  VALUES (1, 'word', 'urbanDef1', 'urbanDef2', 'urbanSent1', 'urbanSent2', 'oxfordDef1', 'oxfordDef2', 'oxfordSent1', 'oxfordSent2');
  
-
---  label as a foreign key and create a reference 
---  alter command to change soemthing inside a table/data type 
--- INNER JOIN (have them related to each other)
