@@ -6,12 +6,17 @@ CREATE DATABASE words;
 CREATE TABLE words (
   ID SERIAL PRIMARY KEY,
   sentenceId INTEGER,
-  apiId INTEGER,
-  word TEXT,
-  def1 TEXT,
-  def2 TEXT,
-  useInSentence TEXT
+  word VARCHAR (255),
+  urbanDef1 VARCHAR (255),
+  urbanDef2 VARCHAR (255),
+  urbanSent1 VARCHAR (255),
+  urbanSent2 VARCHAR (255),
+  oxfordDef1 VARCHAR (255),
+  oxfordDef2 VARCHAR (255),
+  oxfordSent1 VARCHAR (255),
+  oxfordSent2 VARCHAR (255)
 );
 
-INSERT INTO words (sentenceId, apiId, word, def1, def2, useInSentence) 
- VALUES (1, 2, 'test', 'testdef1', 'testdef2', 'testsentuse');
+INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2) 
+ VALUES (1, 'word', 'urbanDef1', 'urbanDef2', 'urbanSent1', 'urbanSent2', 'oxfordDef1', 'oxfordDef2', 'oxfordSent1', 'oxfordSent2');
+ 
