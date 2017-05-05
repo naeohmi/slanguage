@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-let api = require('./definitions.js');
-let crud = require('./crud.js');
+var api = require('./definitions.js');
+// var crud = require('./crud.js');
 
 router.get('/', (req, res, next) => {
     if (req.query.sentence != null) {
@@ -14,6 +14,11 @@ router.get('/', (req, res, next) => {
         // s: api.getSentence
     })
 });
+router.get('/tasks', api.getAllTasks);
+router.get('/tasks/:id', api.getOneTask);
+// router.post('/tasks', crud.createTask);
+// router.put('/tasks/:id', crud.updateTask);
+router.delete('/tasks/:id', api.deleteTask);
 
 // let passThisAlong = (req, res, next) => {
 //     //console.log("Passed: " + req.query.sentence);

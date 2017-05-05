@@ -20,15 +20,15 @@ INSERT INTO sentences (word1, word2, word3, word4, word5, word6, word7)
 CREATE TABLE words (
   ID SERIAL PRIMARY KEY,
   sentenceId INTEGER,
-  word VARCHAR (255),
-  urbanDef1 VARCHAR (255),
-  urbanDef2 VARCHAR (255),
-  urbanSent1 VARCHAR (255),
-  urbanSent2 VARCHAR (255),
-  oxfordDef1 VARCHAR (255),
-  oxfordDef2 VARCHAR (255),
-  oxfordSent1 VARCHAR (255),
-  oxfordSent2 VARCHAR (255)
+  word VARCHAR,
+  urbanDef1 VARCHAR,
+  urbanDef2 VARCHAR,
+  urbanSent1 VARCHAR,
+  urbanSent2 VARCHAR,
+  oxfordDef1 VARCHAR,
+  oxfordDef2 VARCHAR,
+  oxfordSent1 VARCHAR,
+  oxfordSent2 VARCHAR
 );
 
 INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2) 
