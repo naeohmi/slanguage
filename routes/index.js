@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 var api = require('./definitions.js');
-// var crud = require('./crud.js');
 
 router.get('/', (req, res, next) => {
     if (req.query.sentence != null) {
