@@ -199,7 +199,7 @@ let crudy = new CRUD();
 
 //CRUD
 module.exports = {
-    getSentence: getSentence,
+    getSentence: getSentence, //GET
     // createTask: createTask, //CREATE
     getAllTasks: crudy.getAllTasks, //READ
     getOneTask: crudy.getOneTask, //READ
