@@ -1,10 +1,13 @@
 console.log('definitions.js is alive');
+// const config = require('../models/config.js')
+
 const axios = require('axios');
 const promise = require('bluebird');
 const options = { promiseLib: promise };
 const pgp = require('pg-promise')(options)
-const connectionString = 'postgres://localhost:5432/sentences';
+const connectionString = 'postgres://localhost:5432/slanguage';
 const db = pgp(connectionString);
+
 
 let getSentence = (req, res, next) => {
     // console.log("These are the query results: " + req.query.sentence);
@@ -12,8 +15,8 @@ let getSentence = (req, res, next) => {
     var wordArray = inputSentence.split(' ');
     db.one(setWhere(wordArray))
         // .then(res.redirect('/'))
-        .catch((error) => {
-            // console.log('error', error);
+        .catch((err) => {
+            return next(err);
         });
 };
 
@@ -59,26 +62,29 @@ class GrabDefs {
         axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
 
         .then((res) => {
-            console.log('urban awoke!');
-            //console.log(res.data);
-            var urbanDef1 = res.data.list[0].definition;
-            var urbanSent1 = res.data.list[0].example;
-            var urbanDef2 = res.data.list[1].definition;
-            var urbanSent2 = res.data.list[1].example;
-            console.log('urban1: ' + urbanDef1, urbanSent1);
-            console.log('urban2: ' + urbanDef2, urbanSent2);
-            return urbanDef1, urban
-        });
+                console.log('urban awoke!');
+                //console.log(res.data);
+                var urbanDef1 = res.data.list[0].definition;
+                var urbanSent1 = res.data.list[0].example;
+                var urbanDef2 = res.data.list[1].definition;
+                var urbanSent2 = res.data.list[1].example;
+                console.log('urban1: ' + urbanDef1, urbanSent1);
+                console.log('urban2: ' + urbanDef2, urbanSent2);
+                return urbanDef1, urban
+            })
+            .catch((err) => {
+                return next(err);
+            });
     };
 
 
-    let addUrbanDefs = (req, res, next) => {
-        db.none(
-                'INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)' +
-                'VALUES (${1}, ${word}, ${urbanDef1}, ${urbanDef2}, ${urbanSent1}, ${urbanSent2}, ${oxfordDef1}, ${oxfordDef2}, ${oxfordSent1}, ${oxfordSent2})',
-                req.body)
-            .then(res.redirect('/'))
-    };
+    // let addUrbanDefs = (req, res, next) => {
+    //     db.none(
+    //             'INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)' +
+    //             'VALUES (${1}, ${word}, ${urbanDef1}, ${urbanDef2}, ${urbanSent1}, ${urbanSent2}, ${oxfordDef1}, ${oxfordDef2}, ${oxfordSent1}, ${oxfordSent2})',
+    //             req.body)
+    //         .then(res.redirect('/'))
+    // };
 
 
     grabOxfordDefs(word) {
@@ -107,11 +113,13 @@ class GrabDefs {
                 console.log('oxford1: ' + oxfordDef1, oxfordSent1);
                 console.log('oxford2: ' + oxfordDef2);
             })
-            // .catch((error) => {
-            //console.log('im an errorrr');
-            // console.log('sorry can/t find that word');   
-            //this.grabUrbanDefs(word);
-            //});
+            .catch((err) => {
+                return next(err);
+
+                //console.log('im an errorrr');
+                // console.log('sorry can/t find that word');   
+                //this.grabUrbanDefs(word);
+            });
     };
 };
 // let definitions = new GrabDefs();
