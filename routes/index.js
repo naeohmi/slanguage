@@ -12,10 +12,9 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/tasks', api.getAllTasks);
-router.get('/tasks/:id', api.getOneTask);
-// router.post('/tasks', crud.createTask);
-// router.put('/tasks/:id', crud.updateTask);
-router.delete('/tasks/:id', api.deleteTask);
+router.get('/words', api.readAll);
+router.get('/words/:id', api.readOne);
+router.put('/words/:id', api.update);
+router.delete('/words/:id', api.destroy);
 
 module.exports = router;

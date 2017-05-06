@@ -87,90 +87,73 @@ class GrabDefs {
                     // return oxfordDef1, oxfordSent1, oxfordDef2, oxfordSent2;
 
             }))
-            .catch(error => {
-                console.log(error);
-            })
+            .catch((err) => {
+                return next(err);
+            });
     };
 };
 
 class CRUD {
     constructor() {}
 
-    getAllTasks(req, res, next) {
-        db.any('select * from words') //.any() is one of PG-Promises methods
-            .then(function(data) {
-                // console.log('DATA:', data);
+    allWords(req, res, next) {
+        db.any('SELECT * FROM words')
+            .then((data) => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        data: data,
-                        message: 'All Tasks Retrieved '
+                        data: data
                     });
             })
-            .catch(function(err) {
+            .catch((err) => {
                 return next(err);
             });
     };
 
-    getOneTask(req, res, next) {
-        let taskID = parseInt(req.params.id);
-        db.one('select * from words where id = $1', taskID) //.one() selects one from tasks
-            .then(function(data) {
+    oneWord(req, res, next) {
+        let wordId = parseInt(req.params.id);
+        db.one('SELECT * FROM words WHERE id = $1', wordId) //.one() selects one from tasks
+            .then((data) => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        data: data,
-                        message: 'One Task Was Retrieved'
+                        data: data
                     });
             })
-            .catch(function(err) {
+            .catch((err) => {
                 return next(err);
             });
     };
 
-    // function createTask(req, res, next) {
-    //     // req.body.age = parseInt(req.body.age);
-    //     // console.log('req.body ===>', req.body)
-    //     db.none('insert into words(item, minutes)' +
-    //             'values(${item}, ${minutes})',
-    //             req.body)
-    //         .then(function() {
-    //             res.status(200)
-    //                 .json({
-    //                     status: 'success',
-    //                     message: 'One Task Inserted'
-    //                 });
-    //         })
-    //         .catch(function(err) {
-    //             return next(err);
-    //         });
-    // };
+    updateWord(req, res, next) {
+        db.none(
+            `UPDATE words SET urbanDef1=$1, urbanDef2=$2, urbanSent1=$3, urbanSent2=$4, oxfordDef1=$5, oxfordDef2=$6, oxfordSent1=$7, oxfordSent2=$8 WHERE id=$9)`,
 
-    // function updateTask(req, res, next) {
-    //     db.none('update tasks set item=$1, minutes=$2 where id=$3', [req.body.item, parseInt(req.body.minutes), parseInt(req.params.id)])
-    //         .then(function() {
-    //             res.status(200)
-    //                 .json({
-    //                     status: 'success',
-    //                     message: 'Task Updated'
-    //                 });
-    //         })
-    //         .catch(function(err) {
-    //             return next(err);
-    //         });
-    // };
+            [req.body.urbanDef1, req.body.urbanDef2, req.body.urbanSent1, req.body.urbanSent2, req.body.oxfordDef1, req.body.oxfordDef2, req.body.oxfordSent1, req.body.oxfordSent2, parseInt(req.params.id)]
+        )
 
-    deleteTask(req, res, next) {
-        let taskID = parseInt(req.params.id);
-        db.result('delete from words where id = $1', taskID)
-            .then(function(result) {
+        .then(() => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        message: `Removed ${result.rowCount} task`
                     });
             })
-            .catch(function(err) {
+            .catch((err) => {
+                return next(err);
+            });
+    };
+
+    destroyWord(req, res, next) {
+        let wordId = parseInt(req.params.id);
+        db.result('DELETE from words WHERE id = $1', wordId)
+            .then((result) => {
+                res.status(200)
+                    .json({
+                        status: 'success',
+                        message: `Removed ${result.rowCount} word`
+                    });
+            })
+            .catch((err) => {
                 return next(err);
             });
     };
@@ -180,9 +163,8 @@ let crudy = new CRUD();
 //CRUD
 module.exports = {
     getSentence: getSentence, //GET
-    // createTask: createTask, //CREATE
-    getAllTasks: crudy.getAllTasks, //READ
-    getOneTask: crudy.getOneTask, //READ
-    // updateTask: updateTask, //UPDATE
-    deleteTask: crudy.deleteTask //DELETE
+    readAll: crudy.allWords, //READ
+    readOne: crudy.oneWord, //READ
+    update: crudy.updateWord, //UPDATE
+    destroy: crudy.destroyWord //DELETE
 };
