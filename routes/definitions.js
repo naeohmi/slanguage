@@ -5,6 +5,7 @@ const options = { promiseLib: promise };
 const pgp = require('pg-promise')(options)
 const connectionString = 'postgres://localhost:5432/slanguage';
 const db = pgp(connectionString);
+var apis = require('./apis.js');
 
 let getSentence = (req, res, next) => {
     var inputSentence = req.query.sentence;
@@ -37,15 +38,15 @@ let setWhere = (wordArray) => {
 let wordLoop = (wordArray) => {
     for (let i = 0; i <= wordArray.length; i++) {
         let currentWord = wordArray[i];
-        let yayApiFun = new GrabDefs();
-        yayApiFun.axiosDotAll(currentWord);
+        let apis = new GrabDefs();
+        apis.axiosDotAll(currentWord);
     }
 };
 
 class GrabDefs {
     constructor() {}
     grabUrbanDefs(word) {
-        // console.log('urban defs has awoken!');
+        console.log('urban defs has awoken!');
         return axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
     };
 
