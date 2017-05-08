@@ -3,31 +3,31 @@
 
 An app to help people learn English slang, to communicate effectively with native English speakers.
 
-## Wireframes
+(live at: https://slanguage2.herokuapp.com/)
+
+![homescreen](public/images/slanguage.png)
+
+## Wireframes and Project Management 
 ----------
 
-![image of first wire-frame]
-(./first-frame.jpg)
+![wireframe](public/images/first-frame.jpg)
 
-![image of second wire-frame]
-(./second-frame.jpg)
+![trello](public/images/trello.png)
+
 
 ## User Stories
 ------------
 As a user, I want to send text messages to my friends who speak English as a native/first language. I want to understand their slang and use it appropriately. As a user, I want to input a text message and immediately see a definition of the slang words, abbreviations, and/or hashtags used. I want to save the word and accompanying definitions to use again later, when I'm studying my English. I want to edit the definitions to make them uniquely tailored to me and save those edits for future use. As a user I would like to have the option of translating the English definitions into my native language, so I can thoroughly understand the concept. 
 
-## Pseudocode
+## Pseudocode and visual representation of database
 ----------
-![image of second wire-frame]
-(/images/second-frame.jpg)
 
-## ERD or other visual representation of your database
----
-This can be a basic markdown table with some text or a full on ERD. Check [this](https://www.lucidchart.com/pages/how-to-draw-ERD) for a quick intro to how to draw an ERD. They also have a good tool to help you actually draw it.
+![Pseudocode](public/images/second-frame.jpg)
+
 
 ## Technologies used
 -----------
-* Node.js (including: nodemon, passport, bluebird, pg-promises, and more!)
+* Node.js (including: nodemon, bluebird, pg-promises, and more!)
 * Express.js
 * PostgreSQL
 * JavaScript
@@ -39,10 +39,12 @@ This can be a basic markdown table with some text or a full on ERD. Check [this]
 ## Download Project & Install
 ----------------
 
-This is a very important step and one that you did not need in your first project. When you have a project with a server and a database you need to give instructions to the end user on how to run it. the following is a good example of what this might look like.
+1. [Git clone or download this project]
+2. Create a PostgreSQL database called 'slanguage2'
+3. On your terminal, navigate to the models folder and run `psql  -f slanguage2.sql`
+4. Make sure to npm install nodemon --save
+5. Run nodemon, and app should be available on localhost:3000
 
-1. [Git clone or download this project]('https://github.com/andres-maza/project-2')
-2. Create a PostgreSQL database called 'project_2_db'
-3. On your terminal, run psql -d project_2_db -f migrations/migrations.sql
-4. If you haven't already, install nodemon package (npm install -g nodemon)
-5. Run nodemon, app should be available on localhost:3000
+## Live Heroku Deployment at https://slanguage2.herokuapp.com/
+
+![live-example](public/images/slanguage2.png)
