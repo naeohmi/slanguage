@@ -5,6 +5,7 @@ CREATE DATABASE slanguage;
 
 CREATE TABLE sentences (
   ID SERIAL PRIMARY KEY,
+  word0 VARCHAR (255),
   word1 VARCHAR (255),
   word2 VARCHAR (255),
   word3 VARCHAR (255),
@@ -12,10 +13,10 @@ CREATE TABLE sentences (
   word5 VARCHAR (255),
   word6 VARCHAR (255),
   word7 VARCHAR (255)
-);
+); 
 
-INSERT INTO sentences (word1, word2, word3, word4, word5, word6, word7) 
- VALUES ('test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7');
+INSERT INTO sentences (word0, word1, word2, word3, word4, word5, word6, word7) 
+ VALUES ('start', 'create', 'read', 'update', 'destroy', 'this', 'git', 'init');
 
 CREATE TABLE words (
   ID SERIAL PRIMARY KEY,

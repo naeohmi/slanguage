@@ -1,28 +1,118 @@
+/*
+COLORS
+dark-blueish: #344F5E rgba(52,79,94,1)
+teal: #46B29D rgba(70,178,157,1)
+yellow: #F0CA4D rgba(240,202,77,1)
+orange: #E37B40 rgba(227,123,64,1)
+red: #DE5B49 rgba(222,91,73,1)
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Love+Ya+Like+A+Sister');
 body {
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-#container {
-    width: 50%;
-    height: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-    position: absolute;
-    text-align: center;
-    /*border-radius: 20%;*/
-    top: 50px;
-    left: 50px;
+    font-family: 'Inconsolata', monospace;
 }
 
 h1 {
-    text-transform: uppercase;
-    font-size: 5em;
-    color: black;
-    z-index: 5;
+    font-family: 'Love Ya Like A Sister', cursive;
+    color: white;
+    font-size: 10em;
+    padding: 2vh;
+    text-align: center;
+    text-shadow: 5px 5px 5px rgba(240, 202, 77, 1), 7px 7px 7px rgba(227, 123, 64, 1);
 }
 
-form {
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(227, 123, 64, .7);
+}
+
+#sentenceForm {
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toDefine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .7);
+    color: black;
+    width: 50vw;
+    height: 50vh;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.clickdis {
+    font-family: 'Love Ya Like A Sister', cursive;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(240, 202, 77, .8);
+    width: 20vw;
+    height: 10vh;
+    color: white;
+    font-size: 2em;
+    text-transform: lowercase;
+    transition: 2s;
+}
+
+.clickdis:hover {
+    background-color: pink;
+    font-size: 3em;
+    border: 2px solid white;
+}
+
+#word-box {
+    box-sizing: border-box;
+    border: 2px solid black;
+    transition: 1s;
+    text-align: center;
+    background-color: rgba(240, 202, 77, .6);
+}
+
+#word-box:hover {
+    border: 3px solid gray;
+}
+
+h2 {
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 3.5em;
+    text-transform: uppercase;
+    border: 1px solid #344F5E;
+    background-color: rgba(227, 123, 64, .8);
+    color: black;
+    text-align: center;
+}
+
+h2 a {
+    text-decoration: none;
+    transition: 1s;
+    color: black;
+}
+
+a:hover {
+    color: #DE5B49;
+}
+
+h3 {
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    color: gray;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: 400;
 }
 
 
@@ -66,7 +156,7 @@ https://slicejack.com/fullscreen-html5-video-background-css/
 
 @media (max-width: 767px) {
     .video-container {
-        background: url('../images/beauty.mp4') center center / cover no-repeat;
+        background: url('../images/typewrite.mp4') center center / cover no-repeat;
     }
     .video {
         display: none;

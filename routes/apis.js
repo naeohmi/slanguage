@@ -1,4 +1,5 @@
-var defs = require('./definitions.js');
+// var defs = require('./definitions.js');
+// const axios = require('axios');
 
 class GrabDefs {
     constructor() {}
@@ -31,8 +32,8 @@ class GrabDefs {
                 var urbanSent2 = urban.data.list[1].example;
 
                 var oxfordDef1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
-                var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
-
+                // var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
+                var oxfordDef2 = 'somrthing';
                 var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
                 var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text;
                 // console.log('OXFORD: ' + oxfordDef2, oxfordSent2);
@@ -46,9 +47,9 @@ class GrabDefs {
 
             }))
             .catch((err) => {
-                return next(err);
+                console.log(err);
             });
     };
 };
-let apis = new GrabDefs();
-module.exports = apis;
+// let apis = new GrabDefs();
+// module.exports = GrabDefs;

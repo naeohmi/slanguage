@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<% include ./partials/header %>
+
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <h2>
+            <%= subtitle %>
+        </h2>
+
+        <div class='video-container'>
+            <video autoplay loop class='video'>
+                    <source src="../images/lib.mp4" type="video/webm" >
+                    </video>
+
+        </div>
+        <% data.forEach(function(data){ %>
+
+            <div id="word-box">
+                <ul>
+                    <h2>
+                        <a href="/words/<%= data.id %>">Word: </a>
+                        <br />
+                        <a href="">&#10084;</a>
+                        <%= data.word %>
+                            <a href="/words/de/<%= data.id %>">&#10008;</a>
+                    </h2>
+                    <li>
+                        <h3> Urban Dictionary Definition One: </h3>
+                        <p>
+                            <%= data.urbandef1 %>
+                        </p>
+                    </li>
+                    <li>
+                        <h3> Urban Dictionary Definition Two: </h3>
+                        <p>
+                            <%= data.urbandef2 %>
+                        </p>
+                    </li>
+                    <li>
+                        <h3> Oxford Dictionary Definition One: </h3>
+                        <p>
+                            <%= data.oxforddef1 %>
+                        </p>
+                    </li>
+                    <li>
+                        <h3> Oxford Dictionary Definition Two: </h3>
+                        <p>
+                            <%= data.oxforddef2 %>
+                        </p>
+                    </li>
+                    <li>
+                        <h3> Urban Dictionary Example Sentence One: </h3>
+                        <p>
+                            <%= data.urbansent1 %>
+                        </p>
+                    </li>
+                    <li>
+                        <h3> Urban Dictionary Example Sentence Two: </h3>
+                        <p>
+                            <%= data.urbansent2 %>
+                        </p>
+                    </li>
+
+                    <li>
+                        <h3> Oxford Dictionary Example Sentence One: </h3>
+                        <p>
+                            <%= data.oxfordsent1 %>
+                        </p>
+                    </li>
+
+                    <li>
+                        <h3> Oxford Dictionary Example Sentence Two: </h3>
+                        <p>
+                            <%= data.oxfordsent2 %>
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+            <% }); %>
+
+    </body>
+    <% include ./partials/scripts %>
+
+</html>

@@ -3,18 +3,22 @@
 <% include ./partials/header %>
 
     <body>
-        <div class='video-container'>
-            <video autoplay loop class='video'>
-                    <source src="../images/beauty.mp4" type="video/webm" >
-                    </video>
-        </div>
         <h1>
             <%= title %>
+                <!--squids and flounders lol-->
         </h1>
+        <div class='video-container'>
+            <video autoplay loop class='video'>
+                    <source src="../images/typewrite.mp4" type="video/webm" >
+                    </video>
+        </div>
         <div id='container'>
             <form id="sentenceForm">
-                <input id="toDefine" type="text" name="sentence" placeholder="enter text here">
-                <input type="submit" id="clickSubmit">
+                <input id="toDefine" type="text" name="sentence" placeholder="please enter words here">
+                <input type="submit" class="clickdis">
+                <a href="/words">
+                    <input class="clickdis" type="button" value="definitions" />
+                </a>
             </form>
         </div>
         <div id="defs">
