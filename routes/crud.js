@@ -1,6 +1,6 @@
-//HOW DO I ADD THIS??
+var config = require('../models/config.js');
 
-class CRUD {
+class Crud {
     constructor() {}
 
     allWords(req, res, next) {
@@ -65,7 +65,7 @@ class CRUD {
             });
     };
 };
-let crudy = new CRUD();
+let crudy = new Crud();
 
 //CRUD
 module.exports = {
@@ -75,3 +75,7 @@ module.exports = {
     update: crudy.updateWord, //UPDATE
     destroy: crudy.destroyWord //DELETE
 };
+
+module.exports = {
+    Crud = Crud,
+}

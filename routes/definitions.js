@@ -1,14 +1,6 @@
-// console.log('definitions.js is alive');
-// const axios = require('axios');
-// const promise = require('bluebird');
-// const options = { promiseLib: promise };
-// const pgp = require('pg-promise')(options)
-// const connectionString = 'postgres://localhost:5432/slanguage';
-// const db = pgp(connectionString);
-// const GrabDefs = require('./apis.js');
-
 var config = require('../models/config.js');
-
+var apis = require('./Apis.js');
+// var crud = require('./Crud.js');
 
 let getSentence = (req, res, next) => {
     var inputSentence = req.query.sentence;
@@ -42,63 +34,56 @@ let setWhere = (wordArray) => {
 let wordLoop = (wordArray) => {
     for (let i = 0; i < wordArray.length; i++) {
         let currentWord = wordArray[i];
-        let api = new GrabDefs();
+        let api = new apis();
         api.axiosDotAll(currentWord);
     }
 };
 
-class GrabDefs {
-    constructor() {}
-    grabUrbanDefs(word) {
-        // console.log('urban defs has awoken!');
-        return config.axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
-    };
-    grabOxfordDefs(word) {
-        // console.log('oxford has arrived!');
-        //config headers with access to Oxford Dictionary API
-        var headerConfig = {
-            headers: {
-                "Accept": "application/json",
-                "app_id": "b61ef6b5",
-                "app_key": "eca43cac97b86f34f9f5ae2bb04620fe"
-            }
-        };
-        return config.axios.get(`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/regions=us`, headerConfig)
-    };
+// class GrabDefs {
+//     constructor() {}
+//     grabUrbanDefs(word) {
+//         return config.axios.get(`http://api.urbandictionary.com/v0/define?term=${word}`)
+//     };
 
-    axiosDotAll(currentWord) {
-        config.axios.all([this.grabUrbanDefs(currentWord), this.grabOxfordDefs(currentWord)])
-            .then(config.axios.spread((urban, oxford) => {
+//     grabOxfordDefs(word) {
+//         var headerConfig = {
+//             headers: {
+//                 "Accept": "application/json",
+//                 "app_id": "b61ef6b5",
+//                 "app_key": "eca43cac97b86f34f9f5ae2bb04620fe"
+//             }
+//         };
+//         return config.axios.get(`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/regions=us`, headerConfig)
+//     };
 
-                var urbanDef1 = urban.data.list[0].definition;
-                var urbanSent1 = urban.data.list[0].example;
+//     axiosDotAll(currentWord) {
+//         config.axios.all([this.grabUrbanDefs(currentWord), this.grabOxfordDefs(currentWord)])
+//             .then(config.axios.spread((urban, oxford) => {
 
-                var urbanDef2 = urban.data.list[1].definition;
-                var urbanSent2 = urban.data.list[1].example;
+//                 var urbanDef1 = urban.data.list[0].definition;
+//                 var urbanSent1 = urban.data.list[0].example;
 
-                var oxfordDef1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
-                var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
+//                 var urbanDef2 = urban.data.list[1].definition;
+//                 var urbanSent2 = urban.data.list[1].example;
 
-                var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
-                var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text;
-                // console.log('OXFORD: ' + oxfordDef2, oxfordSent2);
-                config.db.none(
-                        "INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)" +
-                        "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);", [7, currentWord, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2]
-                    )
-                    //.then()
-                    // return urbanDef1, urbanSent1, urbanDef2, urbanSent2;
-                    // return oxfordDef1, oxfordSent1, oxfordDef2, oxfordSent2;
+//                 var oxfordDef1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
+//                 var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
 
-            }))
-            .catch((err) => {
-                console.log(err);
-                // return next(err);
-            });
-    };
-};
+//                 var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
+//                 var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text; //wow 9 deep!
 
-class CRUD {
+//                 config.db.none(
+//                     "INSERT INTO words (sentenceId, word, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2)" +
+//                     "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);", [7, currentWord, urbanDef1, urbanDef2, urbanSent1, urbanSent2, oxfordDef1, oxfordDef2, oxfordSent1, oxfordSent2]
+//                 )
+//             }))
+//             .catch((err) => {
+//                 console.log(err);
+//             });
+//     };
+// };
+
+class Crud {
     constructor() {}
 
     allWords(req, res, next) {
@@ -171,7 +156,7 @@ class CRUD {
     };
 
 };
-let crudy = new CRUD();
+let crudy = new Crud;
 
 //CRUD
 module.exports = {

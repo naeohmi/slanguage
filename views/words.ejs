@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <% include ./partials/header %>
 
@@ -82,6 +82,67 @@
             </div>
             <% }); %>
 
+    </body>
+    <% include ./partials/scripts %>
+
+</html>-->
+
+
+<!DOCTYPE html>
+<html>
+<% include ./partials/header %>
+
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <h2>
+            <%= subtitle %>
+        </h2>
+
+        <div class='video-container'>
+            <video autoplay loop class='video'>
+                    <source src="../images/lib.mp4" type="video/webm" >
+                    </video>
+
+        </div>
+        <% data.forEach(function(data){ %>
+            <a href="/words/<%= data.id %>">
+                <div id="word-box-cont">
+                    <div id="word-box">
+
+                        <h2>Word:
+                            <%= data.word %><br /></h2>
+                        <ul>
+                            <li>
+                                <h3> Urban Dictionary Definition One: </h3>
+                                <p>
+                                    <%= data.urbandef1 %>
+                                </p>
+                            </li>
+                            <li>
+                                <h3> Urban Dictionary Definition Two: </h3>
+                                <p>
+                                    <%= data.urbandef2 %>
+                                </p>
+                            </li>
+                            <li>
+                                <h3> Urban Dictionary Example Sentence One: </h3>
+                                <p>
+                                    <%= data.urbansent1 %>
+                                </p>
+                            </li>
+                            <li>
+                                <h3> Urban Dictionary Example Sentence Two: </h3>
+                                <p>
+                                    <%= data.urbansent2 %>
+                                </p>
+                            </li>
+                        </ul>
+            </a>
+            </div>
+            </div>
+            <% }); %>
     </body>
     <% include ./partials/scripts %>
 

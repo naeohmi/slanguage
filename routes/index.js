@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/words', (req, res, next) => {
-    api.readAll(req, res, next);
+    api.readOne(req, res, next);
     // config.db.any("SELECT * FROM words WHERE id"
     // .then((data) => {
     // res.render('words', {
@@ -37,7 +37,7 @@ router.get('/words', (req, res, next) => {
 // });
 
 router.get('/words/:id', api.readOne);
-router.put('/words/up/:id', api.update);
-router.delete('/words/de/:id', api.destroy);
+router.put('/words/:id', api.update);
+router.delete('/words/:id', api.destroy);
 
 module.exports = router;
