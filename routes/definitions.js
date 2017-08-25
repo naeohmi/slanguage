@@ -5,7 +5,7 @@ var apis = require('./Apis.js');
 let getSentence = (req, res, next) => {
     var inputSentence = req.query.sentence;
     var wordArray = inputSentence.split(' ');
-    config.db.one(setWhere(wordArray))
+    config.db.one(setWhere(wsoordArray))
         .then(res.redirect('/'))
         .catch((err) => {
             return next(err);

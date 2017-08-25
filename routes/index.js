@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-var api = require('./definitions.js');
+const api = require('./definitions.js');
+const config = require('../models/config.js');
 
-var config = require('../models/config.js');
-
-
+//set routes to grab words from input and run API
 router.get('/', (req, res, next) => {
     if (req.query.sentence != null) {
         api.getSentence(req, res, next);
@@ -16,25 +15,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/words', (req, res, next) => {
     api.readOne(req, res, next);
-    // config.db.any("SELECT * FROM words WHERE id"
-    // .then((data) => {
-    // res.render('words', {
-    // title: 'slanguage words',
-    // data: config.db.word
-
-    // })
 });
-
-
-
-// router.get('words/:id', (req, res, next) => {
-//     api.readOne(req, res, next);
-//     let id = req.params.id;
-//     res.render('wrd', {
-//         words: config.db[id - 1],
-//         title: 'Current word is...',
-//     });
-// });
 
 router.get('/words/:id', api.readOne);
 router.put('/words/:id', api.update);

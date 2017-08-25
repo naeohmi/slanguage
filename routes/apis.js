@@ -1,5 +1,5 @@
 var config = require('../models/config.js');
-
+//grab the definitions of the words from input - one at a time - from urban and oxford dictionaries
 class GrabDefs {
     constructor() {}
     grabUrbanDefs(word) {
@@ -22,7 +22,7 @@ class GrabDefs {
     axiosDotAll(currentWord) {
         config.axios.all([this.grabUrbanDefs(currentWord), this.grabOxfordDefs(currentWord)])
             .then(config.axios.spread((urban, oxford) => {
-
+                
                 var urbanDef1 = urban.data.list[0].definition;
                 var urbanSent1 = urban.data.list[0].example;
 
@@ -31,7 +31,6 @@ class GrabDefs {
 
                 var oxfordDef1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
                 var oxfordDef2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].definitions[0];
-                var oxfordDef2 = 'something';
                 var oxfordSent1 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].examples[0].text;
                 var oxfordSent2 = oxford.data.results[0].lexicalEntries[0].entries[0].senses[0].subsenses[0].examples[0].text;
 
