@@ -1,4 +1,5 @@
 var config = require('../models/config.js');
+
 //grab the definitions of the words from input - one at a time - from urban and oxford dictionaries
 class GrabDefs {
     constructor() {}
